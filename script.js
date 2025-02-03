@@ -12,7 +12,7 @@ const addPages = document.querySelector("#addPages")
 const addBookButton = document.querySelector("#addBookButton")
 
 const myLibrary = []
-let headers = ['Title', 'Author', 'Pages', 'Status'];
+let headers = ['Title', 'Author', 'Pages', 'Status', 'Action'];
 
 function Book(title, author, pages, readStatus){
     this.title = title;
@@ -29,12 +29,14 @@ function addToLibrary(title, author, pages, readStatus) {
     
 }
 
-addToLibrary("The Count of Monte Cristo", " Dumas, Alexandre", 390, "not read");
+addToLibrary("The Count of Monte Cristo", " Dumas, Alexandre", 390, "read");
 addToLibrary("Dune Messiah (Dune #2)", " Herbert, Frank", 390, "not read");
 addToLibrary("Heidi", "Spyri, Johanna", 390, "not read");
 addToLibrary("We Also Make Policy", " Garg, Subhash Chandra", 390, "not read");
 
 function generateTable() {
+    libraryTable.innerHTML = "";
+
     let table = document.createElement('table');
     let headerRow = document.createElement('tr');
 
@@ -44,6 +46,8 @@ function generateTable() {
         header.appendChild(textNode);  
         headerRow.appendChild(header);
     });
+
+
 
     table.appendChild(headerRow);
 
@@ -57,7 +61,25 @@ function generateTable() {
             row.appendChild(cell);   
         })
 
+        const tableAction = document.createElement("td");
+        const tableDelete = document.createElement("button");
+        tableDelete.textContent = "Delete"
+        const tableRead = document.createElement("button");
+        tableRead.setAttribute("id", "tableRead");
+        tableRead.textContent = "Read";
+
+        row.appendChild(tableDelete)
+        row.appendChild(tableRead)
+
+
         table.appendChild(row);
+
+        tableRead.addEventListener("click", () => {
+            library.readStatus = (library.readStatus === "not read") ? "read" : "not read";
+            generateTable();
+        })
+
+
     })
 
     libraryTable.appendChild(table);
@@ -85,6 +107,8 @@ addNewBook.addEventListener("submit", (e) => {
     libraryTable.innerHTML = "";
     generateTable();
     addNewBook.reset();
+    modal.close();
+
 
 })
 
