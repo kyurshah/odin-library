@@ -1,6 +1,9 @@
 console.log("this is working")
 
-let libraryTable = document.querySelector('#table');
+const libraryTable = document.querySelector('#table');
+const addBook = document.querySelector("#addBook");
+const closeButton = document.querySelector("#closeButton");
+const modal = document.querySelector("[data-modal]")
 
 const myLibrary = []
 let headers = ['Title', 'Author', 'Pages', 'Status'];
@@ -21,7 +24,7 @@ function addToLibrary(title, author, pages, readStatus) {
 }
 
 addToLibrary("The Count of Monte Cristo", " Dumas, Alexandre", 390, "not read");
-addToLibrary("  Dune Messiah (Dune #2)", " Herbert, Frank", 390, "not read");
+addToLibrary("Dune Messiah (Dune #2)", " Herbert, Frank", 390, "not read");
 addToLibrary("Heidi", "Spyri, Johanna", 390, "not read");
 addToLibrary("We Also Make Policy", " Garg, Subhash Chandra", 390, "not read");
 
@@ -57,3 +60,12 @@ function generateTable() {
 
 
 generateTable();
+
+addBook.addEventListener("click", () => {
+    modal.showModal();
+})
+
+
+closeButton.addEventListener("click", () => {
+    modal.close();
+})
