@@ -5,6 +5,12 @@ const addBook = document.querySelector("#addBook");
 const closeButton = document.querySelector("#closeButton");
 const modal = document.querySelector("[data-modal]")
 
+const addNewBook = document.querySelector("#addNewBook")
+const addTitle = document.querySelector("#addTitle")
+const addAuthor = document.querySelector("#addAuthor")
+const addPages = document.querySelector("#addPages")
+const addBookButton = document.querySelector("#addBookButton")
+
 const myLibrary = []
 let headers = ['Title', 'Author', 'Pages', 'Status'];
 
@@ -59,7 +65,7 @@ function generateTable() {
   }
 
 
-generateTable();
+
 
 addBook.addEventListener("click", () => {
     modal.showModal();
@@ -69,3 +75,17 @@ addBook.addEventListener("click", () => {
 closeButton.addEventListener("click", () => {
     modal.close();
 })
+
+
+addNewBook.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    addToLibrary(addTitle.value, addAuthor.value, addPages.value, "not read")
+
+    libraryTable.innerHTML = "";
+    generateTable();
+    addNewBook.reset();
+
+})
+
+generateTable();
