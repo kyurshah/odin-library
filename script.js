@@ -62,28 +62,34 @@ function generateTable() {
         })
 
         const tableAction = document.createElement("td");
-        const tableDelete = document.createElement("button");
-        tableDelete.textContent = "Delete"
+
         const tableRead = document.createElement("button");
         tableRead.setAttribute("id", "tableRead");
         tableRead.textContent = "Read";
-
-        row.appendChild(tableDelete)
-        row.appendChild(tableRead)
-
-
-        table.appendChild(row);
 
         tableRead.addEventListener("click", () => {
             library.readStatus = (library.readStatus === "not read") ? "read" : "not read";
             generateTable();
         })
 
+        row.appendChild(tableRead)
 
-    })
+        const tableDelete = document.createElement("button");
+        tableDelete.setAttribute("id", "tableDelete");
+        tableDelete.textContent = "Delete";
 
-    libraryTable.appendChild(table);
+        tableDelete.addEventListener("click", () => {
+            myLibrary.splice(myLibrary.indexOf(library), 1);
+            generateTable();
+        })
+        
+        row.appendChild(tableDelete);
     
+        table.appendChild(row);
+    })
+    
+    
+    libraryTable.appendChild(table);
   }
 
 
